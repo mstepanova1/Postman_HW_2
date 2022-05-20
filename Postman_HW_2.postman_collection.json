@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "307e8631-ecd3-40bd-9f94-28bf029f5286",
 		"name": "Postman_HW_2",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18387781"
 	},
 	"item": [
 		{
@@ -99,7 +100,7 @@
 							"console.log(resp.family)\r",
 							"\r",
 							"// Проверить, что u_salary_1_5_year в ответе равно salary*4 (salary забрать из request)\r",
-							"pm.test(\"The response u_salary_1_5_year equals salary*4\", function () {\r",
+							"pm.test(\"The response u_salary_1_5_year equals the request salary*4\", function () {\r",
 							"    pm.expect(resp.family.u_salary_1_5_year).to.eql(req.salary * 4);\r",
 							"});"
 						],
@@ -428,8 +429,16 @@
 							"});\r",
 							"\r",
 							"// ***Написать цикл который выведет в консоль по порядку элементы списка из параметра person\r",
-							"for (let i in resp.person) {\r",
-							"    console.log(resp.person[i])\r",
+							"\r",
+							"for(const key in resp.person) {\r",
+							"   if (typeof(resp.person[key]) == 'object') {\r",
+							"       for (let i in Object.keys(resp.person[key])) {\r",
+							"           console.log(resp.person[key][i]);\r",
+							"       }\r",
+							"   }\r",
+							"   else if (typeof(resp.person[key]) != 'object') {\r",
+							"        console.log(resp.person[key]);\r",
+							"   }\r",
 							"}"
 						],
 						"type": "text/javascript"
